@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CompletePage extends BaseAuthorizedPage {
 
     @FindBy(className = "complete-header")
-    private WebElement labelCompleteOnPage;
+    WebElement labelCompleteOnPage;
 
 
     public CompletePage(WebDriver driver) {

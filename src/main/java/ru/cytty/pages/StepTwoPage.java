@@ -1,5 +1,6 @@
 package ru.cytty.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,9 +11,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class StepTwoPage extends BaseAuthorizedPage {
 
     @FindBy(className = "summary_info_label")
-    private WebElement paymentInformation;
+    WebElement paymentInformation;
     @FindBy(id = "finish")
-    private WebElement finishButton;
+    WebElement finishButton;
 
 
     public StepTwoPage(WebDriver driver) {
@@ -33,7 +34,7 @@ public class StepTwoPage extends BaseAuthorizedPage {
         assertThat(paymentInformation.getText(), equalTo("Payment Information:"));
         return this;
     }
-
+    @Step("Завершаем оформление заказа")
     public CompletePage clickToFinishButton() {
         finishButton.click();
         return new CompletePage(driver);
