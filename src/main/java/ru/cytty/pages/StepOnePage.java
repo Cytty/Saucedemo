@@ -1,65 +1,65 @@
 package ru.cytty.pages;
 
 import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNot.not;
 
 public class StepOnePage extends BaseAuthorizedPage {
     static Faker faker = new Faker();
 
     @FindBy(id = "first-name")
-    private WebElement firstName;
+    WebElement firstName;
     @FindBy(id = "last-name")
-    private WebElement lastName;
+    WebElement lastName;
     @FindBy(id = "postal-code")
-    private WebElement postalCode;
+    WebElement postalCode;
     @FindBy(id = "continue")
-    private WebElement continueButton;
-    @FindBy(css = "#checkout_info_container > div > form > div.checkout_info > div.error-message-container.error > h3")
-    private WebElement labelError;
+    WebElement continueButton;
+    @FindBy(css = "#checkout_info_container > div > form > div.checkout_info > div.error-message-container.error")
+    WebElement labelError;
     @FindBy(css = "#header_container > div.header_secondary_container > span")
-    private WebElement titleStepOnePage;
+    WebElement titleStepOnePage;
     @FindBy(id = "cancel")
-    private WebElement cancelButton;
+    WebElement cancelButton;
 
 
     public StepOnePage(WebDriver driver) {
         super(driver);
     }
 
-
+    @Step("Вводим Имя {firstName}")
     public StepOnePage enterFirstName() {
         firstName.click();
         firstName.sendKeys(faker.name().fullName());
         return this;
     }
-
+    @Step("Вводим Фамилию {lastName}")
     public StepOnePage enterLastName() {
         lastName.click();
         lastName.sendKeys(faker.name().lastName());
         return this;
     }
-
+    @Step("Вводим адрес {postalCode}")
     public StepOnePage enterPostalCode() {
         postalCode.click();
         postalCode.sendKeys(faker.code().toString());
         return this;
     }
-
+    @Step("Продолжаем оформление заказа без ввода данных адресата")
     public StepOnePage clickToContinueErrorButton() {
         continueButton.click();
-        assertThat(labelError.getText(), equalTo("Error: First Name is required"));
+        assertThat(existsElement(labelError), equalTo(true));
         return this;
     }
-
+    @Step("Продолжаем оформление заказа после ввода данных адресата")
     public StepTwoPage clickToContinueButton() {
         continueButton.click();
+        assertThat(driver.getCurrentUrl(), equalTo("https://www.saucedemo.com/checkout-step-two.html"));
         return new StepTwoPage(driver);
     }
 

@@ -1,5 +1,6 @@
 package ru.cytty.pages;
 
+import lombok.Getter;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import java.time.Duration;
 import static org.openqa.selenium.support.PageFactory.initElements;
 
 public abstract class BasePage {
+    @Getter
     WebDriver driver;
 
     public BasePage(WebDriver driver) {

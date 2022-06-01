@@ -1,15 +1,19 @@
 package ru.cytty.tests;
 
+import io.qameta.allure.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.cytty.pages.BaseAuthorizedPage;
-import ru.cytty.pages.InventoryPage;
 import ru.cytty.pages.LoginPage;
 import ru.cytty.pages.StepOnePage;
 
+@Severity(SeverityLevel.CRITICAL)
+@Feature("Тесты на наличие элементов на странице https://www.saucedemo.com/checkout-step-one.html для обычного пользователя")
+@Story("Тесты на наличие элементов на странице https://www.saucedemo.com/checkout-step-one.html для обычного пользователя")
+@Epic("Обычный пользователь")
 public class ElementChecksTests extends BaseTest {
     final static Logger logger = LoggerFactory.getLogger(ElementChecksTests.class);
 
@@ -31,6 +35,7 @@ public class ElementChecksTests extends BaseTest {
     }
 
     @Test
+    @Description("Проверка наличия элементов в шапке сайта")
     void siteCapElementChecksTests() {
         logger.info("Проверка наличия элементов в шапке сайта");
         new BaseAuthorizedPage(driver)
@@ -42,6 +47,7 @@ public class ElementChecksTests extends BaseTest {
     }
 
     @Test
+    @Description("Проверка наличия элементов на основной странице оформления заказа")
     void masterPageElementChecksTests() {
         logger.info("Проверка наличия элементов на основной странице оформления заказа");
         new StepOnePage(driver)
@@ -60,15 +66,17 @@ public class ElementChecksTests extends BaseTest {
     }
 
     @Test
+    @Description("Проверка появления ошибки при отправлении пустых полей оформления заказа")
     void masterPageElementErrorChecksTests() {
-        logger.info("Проверка наличия элементов на основной странице оформления заказа при отправлении пустых полей");
+        logger.info("Проверка появления ошибки при отправлении пустых полей оформления заказа");
         new StepOnePage(driver)
                 .clickToContinueErrorButton();
-        logger.info("Проверка наличия элементов на основной странице оформления заказа при отправлении пустых полей завершена");
+        logger.info("Проверка появления ошибки при отправлении пустых полей оформления заказа завершена");
 
     }
 
     @Test
+    @Description("Проверка наличия элементов в боковом меню сайта")
     void sideMenuElementChecksTests() {
         logger.info("Проверка наличия элементов в боковом меню сайта");
         new StepOnePage(driver)
@@ -101,6 +109,7 @@ public class ElementChecksTests extends BaseTest {
     }
 
     @Test
+    @Description("Проверка наличия элементов в подвале сайта")
     void siteBasementElementChecksTests() {
         logger.info("Проверка наличия элементов в подвале сайта");
         new StepOnePage(driver)
